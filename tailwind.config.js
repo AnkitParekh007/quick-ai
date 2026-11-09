@@ -1,0 +1,2 @@
+/** @type {import("tailwindcss").Config} */
+export default {darkMode:"class",content:["./index.html","./src/**/*.{js,ts,jsx,tsx}"],theme:{extend:{fontFamily:{sans:["Inter","ui-sans-serif","system-ui"]},colors:{canvas:"hsl(var(--canvas))",surface:"hsl(var(--surface))",ink:"hsl(var(--ink))",muted:"hsl(var(--muted))",line:"hsl(var(--line))",accent:"hsl(var(--accent))",soft:"hsl(var(--soft))"}}},plugins:[]};

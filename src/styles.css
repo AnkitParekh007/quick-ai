@@ -1,0 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root{--canvas:225 33% 97%;--surface:0 0% 100%;--ink:225 29% 15%;--muted:222 12% 42%;--line:225 20% 89%;--accent:249 73% 57%;--soft:248 95% 96%;color-scheme:light}
+.dark{--canvas:228 24% 9%;--surface:228 22% 13%;--ink:220 25% 95%;--muted:220 14% 69%;--line:225 15% 25%;--accent:251 90% 75%;--soft:248 25% 22%;color-scheme:dark}
+@layer base{*{box-sizing:border-box}body{@apply font-sans antialiased}button,a,select,input{@apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas}}
+@layer components{.icon-button{@apply rounded-lg p-2 text-muted transition hover:bg-soft hover:text-ink}}
