@@ -1,6 +1,6 @@
 import {useMemo,useState} from "react";
 import {Link,useSearchParams} from "react-router-dom";
-import {ArrowRight,BookOpen,CheckCircle2,Clock3,Compass,GraduationCap,Info,LockKeyhole,Search,Star} from "lucide-react";
+import {ArrowRight,BookOpen,CheckCircle2,Clock3,GraduationCap,Info,LockKeyhole,Search,Star} from "lucide-react";
 import {guidedPaths,glossary} from "../data/careerPaths";
 import {questions} from "../data/questions";
 import {useCareer} from "../context/CareerContext";

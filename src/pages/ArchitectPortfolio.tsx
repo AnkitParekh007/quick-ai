@@ -2,14 +2,13 @@ import {useState} from "react";
 import {Link} from "react-router-dom";
 import {ArrowDownToLine,BookOpen,FolderHeart,Trophy} from "lucide-react";
 import {useCareer} from "../context/CareerContext";
-import {useApp} from "../context/AppContext";
 import {useQuiz} from "../context/QuizContext";
 import {guidedPaths} from "../data/careerPaths";
 import {buildProjects} from "../data/careerProjects";
 import {questions} from "../data/questions";
 function download(name:string,txt:string){const url=URL.createObjectURL(new Blob([txt],{type:"text/markdown"}));const el=document.createElement("a");el.href=url;el.download=name;el.click();window.setTimeout(()=>URL.revokeObjectURL(url),1000)}
 export function ArchitectPortfolio(){
- const {career,update}=useCareer();const {progress}=useApp();const {attempts,stats}=useQuiz();const [summary,setSummary]=useState(career.reflections["profile"]||"");
+ const {career,update}=useCareer();const {attempts,stats}=useQuiz();const [summary,setSummary]=useState(career.reflections["profile"]||"");
  const paths=guidedPaths.map(p=>({p,done:p.lessons.filter(l=>career.completedLessons.includes(l.id)).length}));const completed=paths.filter(x=>x.done===x.p.lessons.length);
  const category=new Map<string,{correct:number;total:number}>();for(const a of attempts)for(const [name,score] of Object.entries(a.categoryBreakdown)){const c=category.get(name)||{correct:0,total:0};c.correct+=score.correct;c.total+=score.total;category.set(name,c)}
  const strong=[...category].filter(([,s])=>s.total>=2&&s.correct/s.total>=.75).map(([k])=>k).slice(0,6);

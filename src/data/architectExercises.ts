@@ -4,12 +4,12 @@ export const decisionDrills:DecisionDrill[]=[
     "id": "rag-finetune",
     "scenario": "An insurer updates its policy documents weekly. Answers must cite current rules.",
     "choices": [
-      "RAG with versioned document retrieval",
       "Fine-tune monthly",
       "Just use a larger model",
+      "RAG with versioned document retrieval",
       "Use a static system prompt"
     ],
-    "correct": 0,
+    "correct": 2,
     "recommended": "RAG with versioned document retrieval",
     "reason": "Retrieval gives the assistant current evidence without retraining for each policy change.",
     "tradeoffs": "Ingestion and indexing add maintenance, but citations and freshness improve.",
@@ -42,12 +42,12 @@ export const decisionDrills:DecisionDrill[]=[
     "id": "agent-workflow",
     "scenario": "Expense approvals follow fixed rules; AI reads receipts and requests approval.",
     "choices": [
-      "Deterministic workflow with AI-assisted extraction",
       "Unrestricted autonomous agent",
       "Single prompt that makes payments",
-      "Multiple agents that all can pay"
+      "Multiple agents that all can pay",
+      "Deterministic workflow with AI-assisted extraction"
     ],
-    "correct": 0,
+    "correct": 3,
     "recommended": "Deterministic workflow with AI-assisted extraction",
     "reason": "Fixed business steps should be implemented in ordinary code; use AI only where judgment is needed.",
     "tradeoffs": "Less flexibility but better auditability and predictable execution.",
@@ -61,12 +61,12 @@ export const decisionDrills:DecisionDrill[]=[
     "id": "hosting",
     "scenario": "A small startup needs an assistant next week; it has no GPU team and ordinary privacy needs.",
     "choices": [
-      "Managed cloud model API with contractual safeguards",
       "Self-host a large model immediately",
+      "Managed cloud model API with contractual safeguards",
       "Train a foundation model",
       "Deploy one model per user"
     ],
-    "correct": 0,
+    "correct": 1,
     "recommended": "Managed cloud model API with contractual safeguards",
     "reason": "A managed API reduces infrastructure and launch complexity; hosting choice must match data handling rules.",
     "tradeoffs": "Provider dependence and variable token costs versus faster delivery.",
@@ -80,12 +80,12 @@ export const decisionDrills:DecisionDrill[]=[
     "id": "retrieval",
     "scenario": "Technicians search for exact fault codes such as ERR-429 across thousands of manuals.",
     "choices": [
-      "Keyword search or hybrid lexical + semantic retrieval",
       "Vector-only search without testing",
       "Fine-tuning on the manuals",
+      "Keyword search or hybrid lexical + semantic retrieval",
       "Use random document sampling"
     ],
-    "correct": 0,
+    "correct": 2,
     "recommended": "Keyword search or hybrid lexical + semantic retrieval",
     "reason": "Exact identifiers benefit from lexical matching; hybrid retrieval also handles paraphrases.",
     "tradeoffs": "Hybrid adds two indexes and a merge strategy.",
@@ -99,12 +99,12 @@ export const decisionDrills:DecisionDrill[]=[
     "id": "approval",
     "scenario": "An AI assistant is about to issue a $15,000 refund after interpreting a complaint.",
     "choices": [
-      "Human approval bound to exact transaction details",
       "Full automation for every refund",
+      "Human approval bound to exact transaction details",
       "Hide the tool from the user",
       "Ask a second model to approve alone"
     ],
-    "correct": 0,
+    "correct": 1,
     "recommended": "Human approval bound to exact transaction details",
     "reason": "High-impact irreversible actions need independent authorization and explicit approval.",
     "tradeoffs": "Approval increases time but sharply limits damage from bad interpretation.",
@@ -350,11 +350,11 @@ export const failureCases:FailureCase[]=[
     "title": "A policy bot confidently invents a reimbursement limit.",
     "root": "No evidence grounding and no citation verification.",
     "options": [
-      "Add retrieval and claim-level citation verification",
       "Increase output temperature",
+      "Add retrieval and claim-level citation verification",
       "Remove source links"
     ],
-    "correct": 0,
+    "correct": 1,
     "improved": "Versioned RAG → evidence check → supported response or uncertainty"
   },
   {
@@ -362,11 +362,11 @@ export const failureCases:FailureCase[]=[
     "title": "A bot quotes last year's parental leave policy.",
     "root": "No freshness or update mechanism in the document index.",
     "options": [
-      "Enable incremental indexing and version priority",
       "Only add a larger prompt",
-      "Add more agents"
+      "Add more agents",
+      "Enable incremental indexing and version priority"
     ],
-    "correct": 0,
+    "correct": 2,
     "improved": "Ingestion versioning → freshness filters → retrieval → cited answer"
   },
   {
@@ -386,11 +386,11 @@ export const failureCases:FailureCase[]=[
     "title": "One employee sees another company's contract.",
     "root": "Tenant and document authorization was missing from retrieval.",
     "options": [
-      "Enforce identity-aware retrieval filters",
       "Add polite wording",
-      "Increase similarity threshold"
+      "Increase similarity threshold",
+      "Enforce identity-aware retrieval filters"
     ],
-    "correct": 0,
+    "correct": 2,
     "improved": "Auth → tenant ACL → retrieval → scoped generation + audit"
   },
   {
@@ -398,11 +398,11 @@ export const failureCases:FailureCase[]=[
     "title": "An agent takes 35 seconds to answer a short FAQ.",
     "root": "Unnecessary sequential tool/model calls on an easy path.",
     "options": [
-      "Profile trace and use a direct fast path",
       "Use more autonomous steps",
+      "Profile trace and use a direct fast path",
       "Disable metrics"
     ],
-    "correct": 0,
+    "correct": 1,
     "improved": "Router → direct answer or bounded agent → timeout / cache"
   },
   {
@@ -422,11 +422,11 @@ export const failureCases:FailureCase[]=[
     "title": "An agent sends an email to the wrong customer.",
     "root": "Tool inputs were not verified and user approval was bypassed.",
     "options": [
-      "Validate recipient and require confirmation",
       "Increase model confidence wording",
-      "Retry the send blindly"
+      "Retry the send blindly",
+      "Validate recipient and require confirmation"
     ],
-    "correct": 0,
+    "correct": 2,
     "improved": "Structured proposal → recipient validation → human confirmation → idempotent send"
   }
 ];

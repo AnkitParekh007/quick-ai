@@ -1,7 +1,6 @@
 import {useMemo,useRef,useState} from "react";
 import {ArrowDownToLine,FileText,Link2,MousePointer2,Plus,Save,Trash2} from "lucide-react";
 import {blockTypes} from "../data/careerProjects";
-import {designChallenges} from "../data/architectExercises";
 import {useCareer,type ArchitectBlock,type ArchitectDesign,type ArchitectEdge} from "../context/CareerContext";
 const palette:Record<string,{stroke:string;fill:string}>={user:{stroke:"#2563eb",fill:"#dbeafe"},model:{stroke:"#7c3aed",fill:"#ede9fe"},data:{stroke:"#15803d",fill:"#dcfce7"},external:{stroke:"#c2410c",fill:"#ffedd5"},error:{stroke:"#b91c1c",fill:"#fee2e2"}};
 const WIDTH=1140,HEIGHT=720;
