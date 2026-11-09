@@ -343,7 +343,7 @@ export const designChallenges:DesignChallenge[]=[
     ]
   }
 ];
-export interface FailureCase{id:string;title:string;root:string;options:string[];correct:number;improved:string}
+export interface FailureCase{id:string;title:string;root:string;rootChoices:string[];rootCorrect:number;options:string[];correct:number;improved:string}
 export const failureCases:FailureCase[]=[
   {
     "id": "hallucination",
@@ -355,7 +355,13 @@ export const failureCases:FailureCase[]=[
       "Remove source links"
     ],
     "correct": 1,
-    "improved": "Versioned RAG → evidence check → supported response or uncertainty"
+    "improved": "Versioned RAG → evidence check → supported response or uncertainty",
+    "rootChoices": [
+      "The app has too many monitoring dashboards.",
+      "No evidence grounding and no citation verification.",
+      "The system has a sufficiently fresh context window."
+    ],
+    "rootCorrect": 1
   },
   {
     "id": "stale",
@@ -367,7 +373,13 @@ export const failureCases:FailureCase[]=[
       "Enable incremental indexing and version priority"
     ],
     "correct": 2,
-    "improved": "Ingestion versioning → freshness filters → retrieval → cited answer"
+    "improved": "Ingestion versioning → freshness filters → retrieval → cited answer",
+    "rootChoices": [
+      "Sampling randomness is the primary problem.",
+      "The text font causes outdated dates.",
+      "No freshness or update mechanism in the document index."
+    ],
+    "rootCorrect": 2
   },
   {
     "id": "injection",
@@ -379,7 +391,13 @@ export const failureCases:FailureCase[]=[
       "Increase token limit"
     ],
     "correct": 0,
-    "improved": "Untrusted page → input isolation → tool authorization → safe result"
+    "improved": "Untrusted page → input isolation → tool authorization → safe result",
+    "rootChoices": [
+      "Untrusted content crossed the instruction and tool trust boundary.",
+      "The product catalog is too small.",
+      "A batch queue processes requests too slowly."
+    ],
+    "rootCorrect": 0
   },
   {
     "id": "leak",
@@ -391,7 +409,13 @@ export const failureCases:FailureCase[]=[
       "Enforce identity-aware retrieval filters"
     ],
     "correct": 2,
-    "improved": "Auth → tenant ACL → retrieval → scoped generation + audit"
+    "improved": "Auth → tenant ACL → retrieval → scoped generation + audit",
+    "rootChoices": [
+      "The answer contains too many words.",
+      "The app uses a small GPU cluster.",
+      "Tenant and document authorization was missing from retrieval."
+    ],
+    "rootCorrect": 2
   },
   {
     "id": "latency",
@@ -403,7 +427,13 @@ export const failureCases:FailureCase[]=[
       "Disable metrics"
     ],
     "correct": 1,
-    "improved": "Router → direct answer or bounded agent → timeout / cache"
+    "improved": "Router → direct answer or bounded agent → timeout / cache",
+    "rootChoices": [
+      "The response tone is wrong.",
+      "Unnecessary sequential tool/model calls on an easy path.",
+      "The retention period is too short."
+    ],
+    "rootCorrect": 1
   },
   {
     "id": "cost",
@@ -415,7 +445,13 @@ export const failureCases:FailureCase[]=[
       "Store every conversation forever"
     ],
     "correct": 0,
-    "improved": "Task gate → efficient model → sampling evals → cost dashboard"
+    "improved": "Task gate → efficient model → sampling evals → cost dashboard",
+    "rootChoices": [
+      "No model routing, batching, or token budget.",
+      "The model is too polite.",
+      "The customer entered a long name."
+    ],
+    "rootCorrect": 0
   },
   {
     "id": "action",
@@ -427,6 +463,12 @@ export const failureCases:FailureCase[]=[
       "Validate recipient and require confirmation"
     ],
     "correct": 2,
-    "improved": "Structured proposal → recipient validation → human confirmation → idempotent send"
+    "improved": "Structured proposal → recipient validation → human confirmation → idempotent send",
+    "rootChoices": [
+      "The reply uses markdown.",
+      "The app lacks diagram zoom.",
+      "Tool inputs were not verified and user approval was bypassed."
+    ],
+    "rootCorrect": 2
   }
 ];
