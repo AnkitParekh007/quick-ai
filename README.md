@@ -59,3 +59,13 @@ Select any diagram node with a mouse, tap, Enter, or Space to inspect its role, 
 Node color semantics: blue (user/application), purple (model), green (data/tools), orange (external services), red (errors/security checks). A memoized SVG renderer uses lightweight vector graphics without a diagram service or network dependency.
 
 To validate locally: `npm install && npm run build`. This is a front-end educational diagram tool, not a substitute for full engineering design documents.
+
+## Nova — AI learning buddy
+
+Nova is an original, lightweight SVG robot companion visible only on question detail pages. Open the small bottom-right bubble to use explanation modes (simple, analogy, practical example, technical, interview, or scenario). The explanation is derived locally from the question bank. Nova requires **no API key or backend** and never sends user input to an external service.
+
+Use Pause/Resume, Skip, Replay, and Speed up for the word-by-word explanation. After completion, select Got it, Explain differently, Show diagram, or Quiz me. The mascot responds briefly to quiz feedback inline **after** answers are submitted; it never blocks quiz questions or covers quiz choices. On mobile, its panel opens as a bottom sheet.
+
+Under **Settings**, disable Nova, disable animations, or opt into opening the panel automatically; preferences are saved in localStorage. With prefers-reduced-motion, Nova stays static and explanations appear immediately. The existing Teach it back experience provides keyword-based feedback.
+
+Implementation: `src/components/nova/` contains `NovaMascot`, `NovaBubble`, `NovaPanel`, `NovaMessage`, `NovaAnimationController`, `TypewriterText`, and `NovaControls`. `src/data/novaScripts.ts` generates explanations from existing question fields; optional remote generation is not enabled.

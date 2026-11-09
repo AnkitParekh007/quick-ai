@@ -15,3 +15,22 @@
 @keyframes viz-dash{to{stroke-dashoffset:-48}}.viz-flow{animation:viz-dash 1.25s linear infinite}
 svg [role="button"]:focus-visible .viz-focus-outline{stroke-width:4}
 @media(prefers-reduced-motion:reduce){.viz-flow{animation:none!important}svg animateMotion{display:none}}
+
+/* Nova's CSS/SVG animation system: calm by default, no sound */
+.nova-dock{max-height:90vh}.nova-panel{overflow:hidden}.nova-panel-wide{width:min(480px,calc(100vw - 2rem))}.nova-panel .nova-robot{flex-shrink:0}
+@keyframes nova-breathe{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-1px) scale(1.018)}}
+@keyframes nova-blink{0%,94%,98%,100%{transform:scaleY(1)}96%{transform:scaleY(.1)}}
+@keyframes nova-wave{0%,100%{transform:rotate(0)}35%{transform:rotate(-16deg)}65%{transform:rotate(13deg)}}
+@keyframes nova-pop{0%,100%{transform:translateY(0)}35%{transform:translateY(-5px)}70%{transform:translateY(-1px)}}
+@keyframes nova-tilt{0%,85%,100%{transform:rotate(0deg)}90%{transform:rotate(3deg)}95%{transform:rotate(-2deg)}}
+@keyframes nova-talk{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.55)}}
+@keyframes nova-cursor{50%{opacity:0}}
+.nova-robot:not(.nova-static) .nova-body{transform-origin:50% 55%;animation:nova-breathe 5s ease-in-out infinite,nova-tilt 11s ease-in-out infinite}
+.nova-robot:not(.nova-static) .nova-eyes{transform-origin:48px 45px;animation:nova-blink 7.5s linear infinite}
+.nova-robot.nova-greeting:not(.nova-static) .nova-arm-right{transform-origin:78px 56px;animation:nova-wave .7s ease-in-out 1}
+.nova-robot.nova-success:not(.nova-static) .nova-body{animation:nova-pop .7s ease-in-out 1}
+.nova-robot.nova-speaking:not(.nova-static) .nova-mouth{transform-origin:48px 57px;animation:nova-talk .28s ease-in-out infinite}
+.nova-robot.nova-thinking:not(.nova-static) .nova-body{filter:drop-shadow(0 0 4px #a5b4fc)}
+.nova-cursor{animation:nova-cursor .6s steps(1,end) infinite;color:var(--viz-purple-stroke)}
+@media(max-width:1023px){.nova-dock .nova-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;max-height:85vh}}
+@media(prefers-reduced-motion:reduce){.nova-robot *,.nova-cursor{animation:none!important;transition:none!important}.nova-bubble{transition:none!important}}
