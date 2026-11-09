@@ -1,4 +1,4 @@
-import {useCallback,useEffect,useMemo,useState} from "react";
+import {useCallback,useEffect,useMemo,useRef,useState} from "react";
 import {Link} from "react-router-dom";
 import {BookCheck,Maximize2,Minimize2,Settings2,X} from "lucide-react";
 import type {Question} from "../../types";
@@ -20,9 +20,10 @@ export function NovaPanel({question:q,onClose,onMinimize,onHide}:{question:Quest
  const script=useMemo(()=>novaScript(q,mode),[q,mode]);const due=Object.values(schedule).filter(s=>new Date(s.dueAt).getTime()<=Date.now()).length;
  const onComplete=useCallback(()=>{setFinished(true);send("DONE")},[]);
  const play=(newMode?:NovaMode)=>{if(newMode)setMode(newMode);setFinished(false);setPaused(false);setEpoch(n=>n+1);send("THINK")};
+ const [firstVisit,setFirstVisit]=useState(false);
+ const greetingHandled=useRef(false);
+ useEffect(()=>{if(greetingHandled.current)return;greetingHandled.current=true;let fresh=false;try{const key="nova-greeted-"+q.id;fresh=!sessionStorage.getItem(key);if(fresh)sessionStorage.setItem(key,"1")}catch{}setFirstVisit(fresh);send(fresh?"OPEN":"THINK")},[q.id]);
  useEffect(()=>{const timer=window.setTimeout(()=>send("SPEAK"),reduced?0:firstVisit?850:240);return()=>window.clearTimeout(timer)},[epoch,reduced,firstVisit]);
- const firstVisit=useMemo(()=>{try{const k="nova-greeted-"+q.id;if(sessionStorage.getItem(k))return false;sessionStorage.setItem(k,"1");return true}catch{return false}},[q.id]);
- useEffect(()=>{if(firstVisit)send("OPEN");else send("THINK")},[firstVisit,q.id]);
  useEffect(()=>{setMode("simple");setEpoch(0);setFinished(false);setPaused(false);setText("");setFeedback(null)},[q.id]);
  const skip=()=>{setPaused(false);setFinished(true);setEpoch(e=>e+1);send("DONE")};
  const [forceFull,setForceFull]=useState(false);
