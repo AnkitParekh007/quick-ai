@@ -523,8 +523,36 @@ export function makeVisualLearning(q:Question):VisualLearning|undefined{
  realWorldExample:q.realWorldExample||"This stage appears in practical AI workflows.",
  commonMistake:q.commonMisconception||"The diagram is simplified and does not show every implementation detail."
  }});
- const edges=labels.map((label,i)=>({id:"e"+i,from:nodes[i].id,to:nodes[i+1].id,label,kind:nodes[i+1].role==="error"?"error" as const:"normal" as const}));
- const steps=nodes.map((node,i)=>({id:i+1,highlightNodes:[node.id],highlightEdges:i?[edges[i-1].id]:[],caption:node.simpleLabel+": "+node.description,technicalCaption:node.label+": "+node.description}));
- return {diagramType,title,nodes,edges,steps,beginnerView:"Simple labels and relatable explanations",technicalView:"Accurate components and processing details",altText:title+". "+nodes.map(n=>n.label).join(" then ")+".",};
+ let edges=labels.map((label,i)=>({id:"e"+i,from:nodes[i].id,to:nodes[i+1].id,label,kind:nodes[i+1].role==="error"?"error" as const:"normal" as const}));
+ // Comparisons have explicit parallel paths rather than a misleading serial process.
+ if(q.id==="rag-04")edges=[
+ {id:"e0",from:"n0",to:"n1",label:"exact terms",kind:"normal"},
+ {id:"e1",from:"n0",to:"n2",label:"meaning",kind:"normal"},
+ {id:"e2",from:"n1",to:"n3",label:"merge",kind:"normal"},
+ {id:"e3",from:"n2",to:"n3",label:"merge",kind:"normal"}];
+ if(q.id==="eval-02")edges=[
+ {id:"e0",from:"n0",to:"n2",label:"compare results",kind:"normal"},
+ {id:"e1",from:"n1",to:"n3",label:"compare coverage",kind:"normal"}];
+ if(q.id==="ft-04")edges=[
+ {id:"e0",from:"n0",to:"n1",label:"retrieve facts",kind:"normal"},
+ {id:"e1",from:"n2",to:"n3",label:"adapt behavior",kind:"normal"}];
+ const branches:Record<string,[string,string,string]> = {
+ "llm-03":["Too many tokens","Shorten the text","When the window is exceeded, shorten or summarize the input."],
+ "llm-05":["Unsupported claim","Verify or qualify","A claim without evidence must be checked, corrected, or qualified."],
+ "agent-04":["Permission denied","Ask for approval","Unapproved or risky actions must not execute."],
+ "mcp-03":["Access denied","Stop unsafe call","Without sufficient authorization, the MCP tool must not return protected data."],
+ "prompt-03":["Blocked injection","Ignore the attack","Instructions inside untrusted content cannot override the user's authority."],
+ "prompt-04":["Invalid schema","Fix the format","Malformed output must be rejected or repaired before downstream use."],
+ "eval-01":["Failure found","Improve system","Poor results should trigger diagnosis and retesting, not a production launch."],
+ "ft-03":["Overfitting detected","Improve training","A large generalization gap triggers corrective training choices."]
+ };
+ const branch=branches[q.id];
+ if(branch){
+ const parent=nodes.find(n=>n.role==="error")||nodes[1];
+ nodes.push({id:"failure",label:branch[0],simpleLabel:branch[1],description:branch[2],role:"error",why:"This is the alternative path when a check fails.",analogy:q.analogy||"A safety check before proceeding.",realWorldExample:q.realWorldExample||"A failed check must be handled.",commonMistake:q.commonMisconception||"Checks cannot be assumed to pass."});
+ edges.push({id:"failure-edge",from:parent.id,to:"failure",label:"No / blocked",kind:"error"});
+ }
+ const steps=nodes.map((node,i)=>({id:i+1,highlightNodes:[node.id],highlightEdges:edges.filter(edge=>edge.to===node.id).map(edge=>edge.id),caption:node.id==="failure"?"Alternative path: "+node.description:node.simpleLabel+": "+node.description,technicalCaption:node.id==="failure"?"Failure branch: "+node.description:node.label+": "+node.description}));
+ return {diagramType,title,nodes,edges,steps,beginnerView:"Simple labels and relatable explanations",technicalView:"Accurate components and processing details",altText:title+". "+nodes.filter(n=>n.id!=="failure").map(n=>n.label).join(" then ")+(branch?". Failure branch: "+branch[0]:"")+".",};
 }
 export const diagramIds=specs.map(s=>s[0]);

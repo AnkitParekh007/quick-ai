@@ -17,6 +17,15 @@ function layout(diagram:VisualLearning,small:boolean){
  const viewWidth=small?390:WIDTH;
  const viewHeight=small?core.length*145+(failure?180:45):failure?490:350;
  core.forEach((node,i)=>{positions[node.id]=small?{x:195,y:82+i*145}:{x:(i+0.5)*(WIDTH/core.length),y:170}});
+ if(!small&&diagram.diagramType==="comparison"&&core.length===4){
+  if(diagram.title.includes("Hybrid search")){
+   positions.n0={x:135,y:170};positions.n1={x:460,y:90};positions.n2={x:460,y:255};positions.n3={x:880,y:170};
+  }else{
+   positions.n0={x:235,y:100};positions.n1={x:diagram.title.includes("Precision")?235:800,y:diagram.title.includes("Precision")?255:100};
+   positions.n2={x:diagram.title.includes("Precision")?800:235,y:diagram.title.includes("Precision")?100:255};
+   positions.n3={x:800,y:255};
+  }
+ }
  if(failure)positions.failure=small?{x:195,y:core.length*145+50}:{x:WIDTH*.64,y:390};
  return {positions,viewWidth,viewHeight};
 }
@@ -37,7 +46,7 @@ const DiagramCanvas=memo(function DiagramCanvas({diagram,small,reduced,activeSte
  const activeEdges=new Set(active?.highlightEdges||[]);
  const hasStep=!!active;
  return <div className="overflow-auto rounded-xl border border-line bg-canvas" role="region" aria-label={"Zoomable "+diagram.diagramType+" diagram"} tabIndex={0}>
- <svg style={{width:zoom*100+"%",minWidth:"100%",height:"auto",display:"block"}} viewBox={`0 0 ${viewWidth} ${viewHeight}`} role="group" aria-label={diagram.altText} className="select-none">
+ <svg style={{width:zoom*100+"%",height:"auto",display:"block"}} viewBox={`0 0 ${viewWidth} ${viewHeight}`} role="group" aria-label={diagram.altText} className="select-none">
  <title>{diagram.altText}</title><defs>
  {["blue","purple","green","orange","red","neutral"].map(color=><marker key={color} id={"viz-arrow-"+color} viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill={`var(--viz-${color}-stroke)`}/></marker>)}
  </defs>
@@ -52,6 +61,7 @@ const DiagramCanvas=memo(function DiagramCanvas({diagram,small,reduced,activeSte
 });
 export function VisualLearningDiagram({question}:{question:Question}){const diagram=question.visualLearning;const [mode,setMode]=useState<Mode>("beginner");const [index,setIndex]=useState(-1);const [playing,setPlaying]=useState(false);const [selected,setSelected]=useState(diagram?.nodes[0]?.id||"");const [zoom,setZoom]=useState(1);const small=useSmallScreen();const reduced=useReducedMotion();
  useEffect(()=>{if(reduced)setPlaying(false)},[reduced]);
+ useEffect(()=>{if(diagram&&index>=0){setSelected(diagram.steps[index]?.highlightNodes[0]||diagram.nodes[0].id)}},[index,diagram]);
  useEffect(()=>{if(!playing||!diagram)return;const timer=window.setTimeout(()=>{if(index>=diagram.steps.length-1){setPlaying(false)}else setIndex(i=>i+1)},2600);return()=>window.clearTimeout(timer)},[playing,index,diagram]);
  if(!diagram)return null;
  const step=index>=0?diagram.steps[index]:null;
