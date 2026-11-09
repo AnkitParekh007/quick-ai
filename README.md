@@ -1,4 +1,18 @@
-# AI Concepts Question Bank
+# Quick AI — AI Concepts Learning & Quiz Dashboard
+
+**React · TypeScript · Vite · Local-first learning analytics**
+
+A browser-based AI concepts question bank with searchable study material, quizzes, spaced-repetition flashcards, weak-topic review, and locally stored progress. The UI works without a backend account or hosted AI model.
+
+### Engineering highlights
+
+- **Structured content:** Questions use stable identifiers, categories, difficulty levels, tags, and related-question links.
+- **Study workflows:** Quiz, flashcard, incorrect-answer review, and scheduled repetitions share the same question bank.
+- **Privacy-first persistence:** Learning progress is held in the user's browser through `localStorage`; no account system or remote data service is claimed.
+- **Validation:** Inspect the source and project scripts for what is implemented; this README does not claim independent usability testing or hosted production adoption.
+
+**[Source code](https://github.com/AnkitParekh007/quick-ai)** · **[Question bank](https://github.com/AnkitParekh007/quick-ai/blob/main/src/data/questions.ts)**
+
 
 A responsive React + Vite + TypeScript learning dashboard for concise AI questions.
 
