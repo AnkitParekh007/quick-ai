@@ -1,6 +1,6 @@
 import {useCallback,useEffect,useMemo,useState} from "react";
 import {Link} from "react-router-dom";
-import {BookCheck,BookOpen,Maximize2,Minimize2,Settings2,X} from "lucide-react";
+import {BookCheck,Maximize2,Minimize2,Settings2,X} from "lucide-react";
 import type {Question} from "../../types";
 import {NovaMascot} from "./NovaMascot";
 import {NovaMessage} from "./NovaMessage";

@@ -1,6 +1,6 @@
 import type {NovaState} from "./NovaAnimationController";
 export function NovaMascot({size=48,state="idle",reduced=false}:{size?:32|48|96;state?:NovaState;reduced?:boolean}){
- const happy=state==="success";const worried=state==="error";const thinking=state==="thinking";const speaking=state==="speaking";const greeting=state==="greeting";return <svg width={size} height={size} viewBox="0 0 96 96" role="img" aria-label={"Nova, the friendly robot study buddy"+(state==="idle"?"":", "+state)} className={"nova-robot "+(reduced?"nova-static":"nova-"+state)} xmlns="http://www.w3.org/2000/svg">
+ const happy=state==="success";const worried=state==="error";const thinking=state==="thinking";const greeting=state==="greeting";return <svg width={size} height={size} viewBox="0 0 96 96" role="img" aria-label={"Nova, the friendly robot study buddy"+(state==="idle"?"":", "+state)} className={"nova-robot "+(reduced?"nova-static":"nova-"+state)} xmlns="http://www.w3.org/2000/svg">
  <title>Nova the learning robot</title><defs><linearGradient id="nova-shell" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stopColor="#a5b4fc"/><stop offset="1" stopColor="#7c6be5"/></linearGradient></defs>
  <g className="nova-body"><path d="M48 18V10" stroke="#7963d4" strokeWidth="4" strokeLinecap="round"/><circle cx="48" cy="8" r="5" fill="#7ddcc3" stroke="#51659b" strokeWidth="2"/>
  <g className="nova-arm-left"><path d="M18 56q-11-3-12 8" fill="none" stroke="#8179ce" strokeWidth="7" strokeLinecap="round"/><circle cx="8" cy="66" r="6" fill="#a5e9d6"/></g>
