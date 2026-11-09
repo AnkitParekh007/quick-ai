@@ -2,7 +2,7 @@ export const categories = ["LLMs","Agents","RAG","MCP","Prompting","Evaluation",
 export type Category=typeof categories[number];
 export type Difficulty="Beginner"|"Intermediate"|"Advanced";
 export type Tag=string;
-export interface Question{id:string;question:string;answer:string;category:Category;tags:Tag[];difficulty:Difficulty;relatedIds?:string[];shortAnswer?:string;analogy?:string;realWorldExample?:string;commonMisconception?:string;relatedConcepts?:string[];visualExplanation?:VisualExplanation;keyIdeas?:string[];scenario?:Scenario;quizOptions?:string[];correctOptionIndex?:number;explanation?:string;isTrueFalse?:boolean;correctBoolean?:boolean;fillInTheBlankAnswer?:string;acceptableAnswers?:string[];quizPrompt?:string}
+export interface Question{id:string;question:string;answer:string;category:Category;tags:Tag[];difficulty:Difficulty;relatedIds?:string[];shortAnswer?:string;analogy?:string;realWorldExample?:string;commonMisconception?:string;relatedConcepts?:string[];visualExplanation?:VisualExplanation;visualLearning?:VisualLearning;keyIdeas?:string[];scenario?:Scenario;quizOptions?:string[];correctOptionIndex?:number;explanation?:string;isTrueFalse?:boolean;correctBoolean?:boolean;fillInTheBlankAnswer?:string;acceptableAnswers?:string[];quizPrompt?:string}
 export type ProgressStatus="learned"|"review";
 export type Progress=Record<string,ProgressStatus>;
 export type Theme="light"|"dark"|"system";
@@ -23,3 +23,10 @@ export interface LearningMetadata {analogy:string;realWorldExample:string;common
 export type Clarity="clear"|"somewhat"|"confusing";
 export interface TeachBackResult {questionId:string;text:string;matched:string[];missing:string[];at:string}
 export interface LearningEvent {questionId:string;date:string;kind:"teach"|"view"|"quiz"|"daily"}
+
+export type DiagramType="sequence"|"architecture"|"flowchart"|"comparison"|"dataflow"|"timeline";
+export type DiagramRole="user"|"model"|"data"|"external"|"error";
+export interface DiagramNode {id:string;label:string;simpleLabel:string;description:string;why:string;analogy:string;realWorldExample:string;commonMistake:string;role:DiagramRole}
+export interface DiagramEdge {id:string;from:string;to:string;label:string;kind?:"normal"|"error"}
+export interface DiagramStep {id:number;highlightNodes:string[];highlightEdges:string[];caption:string;technicalCaption?:string}
+export interface VisualLearning {diagramType:DiagramType;title:string;nodes:DiagramNode[];edges:DiagramEdge[];steps:DiagramStep[];beginnerView:string;technicalView:string;altText:string}

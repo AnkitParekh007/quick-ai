@@ -1,0 +1,17 @@
+import {useMemo,useState} from "react";
+import {Link} from "react-router-dom";
+import {Workflow,ArrowUpRight} from "lucide-react";
+import {questions} from "../data/questions";
+import {categories} from "../types";
+import {VisualLearningDiagram} from "../components/VisualLearningDiagram";
+export function VisualLibrary(){
+ const [category,setCategory]=useState("All");
+ const [search,setSearch]=useState("");
+ const [selected,setSelected]=useState(questions.find(q=>!!q.visualLearning)?.id||"");
+ const matches=useMemo(()=>questions.filter(q=>!!q.visualLearning&&(category==="All"||q.category===category)&&(q.question+" "+q.category+" "+q.visualLearning!.title).toLowerCase().includes(search.toLowerCase())),[category,search]);
+ const active=matches.find(q=>q.id===selected)||matches[0];
+ return <div><div className="mb-7 flex items-start gap-3"><span className="rounded-2xl bg-soft p-3 text-accent"><Workflow size={24}/></span><div><h1 className="text-3xl font-bold">Visual Learning</h1><p className="mt-2 text-sm text-muted">Understand the workflow, inspect components, and follow the steps behind AI concepts.</p></div></div>
+ <div className="mb-5 grid gap-3 sm:grid-cols-2"><label className="block"><span className="mb-1 block text-xs font-semibold text-muted">Search diagrams</span><input type="search" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Search concepts and diagrams" className="w-full rounded-xl border border-line bg-surface p-3 text-sm text-ink"/></label><label className="block"><span className="mb-1 block text-xs font-semibold text-muted">Category</span><select value={category} onChange={e=>setCategory(e.target.value)} className="w-full rounded-xl border border-line bg-surface p-3 text-sm text-ink"><option value="All">All categories</option>{categories.map(c=><option key={c}>{c}</option>)}</select></label></div>
+ <p className="mb-4 text-sm text-muted" aria-live="polite">{matches.length} diagrams available</p>
+ {matches.length===0?<p className="rounded-xl border border-line bg-surface p-5 text-sm text-muted">No diagrams match. Try another search or category.</p>:<div className="grid items-start gap-6 xl:grid-cols-[240px_minmax(0,1fr)]"><nav aria-label="Choose a visual concept" className="max-h-96 space-y-1 overflow-auto rounded-xl border border-line bg-surface p-2 xl:max-h-[700px]">{matches.map(q=><button type="button" key={q.id} aria-current={active.id===q.id?"true":undefined} onClick={()=>setSelected(q.id)} className={"w-full rounded-lg px-3 py-2.5 text-left text-sm focus-visible:ring-2 focus-visible:ring-accent "+(q.id===active.id?"bg-soft font-semibold text-accent":"hover:bg-soft")}><span className="block text-xs text-muted">{q.category} · {q.visualLearning?.diagramType}</span><span className="mt-1 block">{q.question}</span></button>)}</nav><div className="min-w-0 space-y-4"><div className="rounded-xl border border-line bg-surface p-4"><div className="flex flex-wrap items-start justify-between gap-2"><div><span className="text-xs font-semibold text-accent">{active.category}</span><h2 className="mt-1 text-lg font-bold">{active.question}</h2></div><Link className="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:underline" to={"/questions/"+active.id}>Full concept <ArrowUpRight size={16}/></Link></div><p className="mt-3 text-sm leading-relaxed text-muted">{active.shortAnswer||active.answer}</p></div><VisualLearningDiagram key={active.id} question={active}/></div></div>}</div>
+}

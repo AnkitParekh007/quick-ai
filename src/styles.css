@@ -6,3 +6,12 @@
 .dark{--canvas:228 24% 9%;--surface:228 22% 13%;--ink:220 25% 95%;--muted:220 14% 69%;--line:225 15% 25%;--accent:251 90% 75%;--soft:248 25% 22%;color-scheme:dark}
 @layer base{*{box-sizing:border-box}body{@apply font-sans antialiased}button,a,select,input{@apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-canvas}}
 @layer components{.icon-button{@apply rounded-lg p-2 text-muted transition hover:bg-soft hover:text-ink}}
+
+
+/* Consistent diagram semantics in light and dark color schemes */
+:root{--viz-text:#182033;--viz-focus:#4f46e5;--viz-line:var(--viz-neutral-stroke);--viz-neutral-stroke:#64748b;--viz-blue-stroke:#1d4ed8;--viz-blue-fill:#dbeafe;--viz-purple-stroke:#7c3aed;--viz-purple-fill:#ede9fe;--viz-green-stroke:#15803d;--viz-green-fill:#dcfce7;--viz-orange-stroke:#c2410c;--viz-orange-fill:#ffedd5;--viz-red-stroke:#b91c1c;--viz-red-fill:#fee2e2}
+.dark{--viz-text:#f8fafc;--viz-focus:#c4b5fd;--viz-neutral-stroke:#a3b0c4;--viz-blue-stroke:#93c5fd;--viz-blue-fill:#172554;--viz-purple-stroke:#c4b5fd;--viz-purple-fill:#3b1d68;--viz-green-stroke:#86efac;--viz-green-fill:#14532d;--viz-orange-stroke:#fdba74;--viz-orange-fill:#7c2d12;--viz-red-stroke:#fca5a5;--viz-red-fill:#7f1d1d}
+.viz-chip-blue{color:var(--viz-blue-stroke);background:var(--viz-blue-fill)}.viz-chip-purple{color:var(--viz-purple-stroke);background:var(--viz-purple-fill)}.viz-chip-green{color:var(--viz-green-stroke);background:var(--viz-green-fill)}.viz-chip-orange{color:var(--viz-orange-stroke);background:var(--viz-orange-fill)}.viz-chip-red{color:var(--viz-red-stroke);background:var(--viz-red-fill)}
+@keyframes viz-dash{to{stroke-dashoffset:-48}}.viz-flow{animation:viz-dash 1.25s linear infinite}
+svg [role="button"]:focus-visible .viz-focus-outline{stroke-width:4}
+@media(prefers-reduced-motion:reduce){.viz-flow{animation:none!important}svg animateMotion{display:none}}

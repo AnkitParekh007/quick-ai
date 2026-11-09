@@ -47,3 +47,15 @@ Question detail pages include **Explain simply**, a clear analogy caveat, a real
 Mark concepts Clear, Somewhat clear, or Confusing to influence daily practice. **Daily 5-minute** offers seven prioritized concepts using due-review, confusion and quiz mistakes, followed by new concepts. The session ends with a small progress recap. Daily completions, XP, badges, and category confidence are persisted locally. Streak recovery is a one-time non-punitive recovery for the previous day. **Learning progress** tracks these signals.
 
 Quiz setup includes a **Real-world scenarios** source with practical dilemmas, four options, and explanation-specific feedback for each choice.
+
+## Visual Learning
+
+Open **Visual Learning** in the sidebar to browse diagrams for all 32 concept questions. Every question detail also includes an interactive, zoomable diagram below its concise answer. Beginner and Technical views, step captions, and per-node explanations help reveal how components interact.
+
+The shared renderer in `src/components/VisualLearningDiagram.tsx` reads structured diagrams from `src/data/visualLearning.ts`. Each question receives a `visualLearning` object at load time; add or edit a declarative diagram specification in that data module without changing the UI. Supported diagrams: architecture, sequence, flowchart, dataflow, comparison, and timeline.
+
+Select any diagram node with a mouse, tap, Enter, or Space to inspect its role, why it exists, analogy, example, and common pitfall. Walkthrough controls provide Play, Pause, Previous, Next, Replay, and Skip. The app detects `prefers-reduced-motion`, disables automatic animation, and preserves manual step navigation and descriptions.
+
+Node color semantics: blue (user/application), purple (model), green (data/tools), orange (external services), red (errors/security checks). A memoized SVG renderer uses lightweight vector graphics without a diagram service or network dependency.
+
+To validate locally: `npm install && npm run build`. This is a front-end educational diagram tool, not a substitute for full engineering design documents.
