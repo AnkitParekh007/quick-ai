@@ -514,7 +514,7 @@ const specs:Spec[]=[
 const roles:Record<string,DiagramRole>={user:"user",model:"model",data:"data",external:"external",error:"error"};
 export function makeVisualLearning(q:Question):VisualLearning|undefined{
  const spec=specs.find(s=>s[0]===q.id);
- if(!spec)return undefined;
+ if(!spec)return architectDiagram(q);
  const [,diagramType,title,stages,labels]=spec;
  const nodes=stages.map((stage,i)=>{const [label,simpleLabel,description,rawRole]=stage.split("~");return {
  id:"n"+i,label,simpleLabel,description,role:roles[rawRole]||"data",
@@ -556,3 +556,23 @@ export function makeVisualLearning(q:Question):VisualLearning|undefined{
  return {diagramType,title,nodes,edges,steps,beginnerView:"Simple labels and relatable explanations",technicalView:"Accurate components and processing details",altText:title+". "+nodes.filter(n=>n.id!=="failure").map(n=>n.label).join(" then ")+(branch?". Failure branch: "+branch[0]:"")+".",};
 }
 export const diagramIds=specs.map(s=>s[0]);
+
+/** A data-driven fallback diagram for new curriculum concepts.
+ * Existing hand-authored diagrams are left intact. */
+function architectDiagram(q:Question):VisualLearning {
+ const chunks=q.answer.split(/(?<=\.)\s+/).filter(Boolean);
+ const first=chunks[0]||q.answer,second=chunks.slice(1).join(" ")||"Validate the result against the task.";
+ const examples=q.realWorldExample||"Apply this idea in a real AI system.";
+ const diagramType:DiagramType=["System Architecture","Tool Integration","Agent Orchestration","State & Memory","Model Serving"].includes(q.category)?"architecture":["Evaluation Design","Safety & Security","Governance"].includes(q.category)?"flowchart":["Retrieval Engineering","Data Engineering","Context Engineering","Multimodal AI"].includes(q.category)?"dataflow":["Machine Learning","Neural Networks","LLM Engineering"].includes(q.category)?"timeline":"sequence";
+ const title="How it works: "+q.question.replace(/[?]$/,"");
+ const shared={analogy:q.analogy||"Like coordinating a series of steps.",realWorldExample:examples,commonMistake:q.commonMisconception||"Always check the real constraints."};
+ const nodes=[
+ {id:"n0",label:"Task & constraints",simpleLabel:"Identify the goal",description:q.question,why:"Start with the real requirement and scope.",role:"user" as const,...shared},
+ {id:"n1",label:"Core mechanism",simpleLabel:"Understand the idea",description:first,why:"This is the principal mechanism behind the concept.",role:"model" as const,...shared},
+ {id:"n2",label:"Design tradeoffs",simpleLabel:"Check limitations",description:second,why:"An architect must consider constraints, errors, and quality.",role:"error" as const,...shared},
+ {id:"n3",label:"Practical application",simpleLabel:"Apply in a system",description:examples,why:"A concrete use case validates understanding.",role:"data" as const,...shared}
+ ];
+ const edges=[{id:"e0",from:"n0",to:"n1",label:"design"},{id:"e1",from:"n1",to:"n2",label:"evaluate"},{id:"e2",from:"n2",to:"n3",label:"apply"}];
+ const steps=nodes.map((node,i)=>({id:i+1,highlightNodes:[node.id],highlightEdges:i?["e"+(i-1)]:[],caption:node.simpleLabel+": "+node.description,technicalCaption:node.label+": "+node.description}));
+ return {diagramType,title,nodes,edges,steps,beginnerView:"Concept → constraints → real-world use",technicalView:"Task → mechanism → evaluation → application",altText:"Four-step learning workflow for "+q.question+" Task, mechanism, tradeoffs, and practical use."};
+}

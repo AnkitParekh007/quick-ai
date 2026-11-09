@@ -2,20 +2,24 @@ import type {LearningMetadata} from "../types";
 // Each question gets a clear analogy, practical example, misconception and teach-back criteria.
 export const learningMetadata:Record<string,LearningMetadata>={
   "llm-01": {
-    "analogy": "llm-01",
-    "realWorldExample": "A predictive-text engine with a huge library of patterns.",
-    "commonMisconception": "ChatGPT drafts a meeting recap from your notes.",
+    "analogy": "A predictive-text engine with a huge library of patterns.",
+    "realWorldExample": "ChatGPT drafts a meeting recap from your notes.",
+    "commonMisconception": "It doesn't look up a guaranteed truth; it predicts likely text.",
     "keyIdeas": [
-      "It doesn't look up a guaranteed truth; it predicts likely text."
+      "training",
+      "predict",
+      "tokens"
     ],
     "relatedConcepts": []
   },
   "llm-02": {
-    "analogy": "llm-02",
-    "realWorldExample": "Text is cut into small puzzle pieces before the model reads it.",
-    "commonMisconception": "A chat app counts tokens to estimate how much conversation fits.",
+    "analogy": "Text is cut into small puzzle pieces before the model reads it.",
+    "realWorldExample": "A chat app counts tokens to estimate how much conversation fits.",
+    "commonMisconception": "One token is not always one complete word.",
     "keyIdeas": [
-      "One token is not always one complete word."
+      "text",
+      "pieces",
+      "units"
     ],
     "relatedConcepts": [],
     "visualExplanation": {
@@ -28,38 +32,46 @@ export const learningMetadata:Record<string,LearningMetadata>={
     }
   },
   "llm-03": {
-    "analogy": "llm-03",
-    "realWorldExample": "A desk only holds so many pages at once.",
-    "commonMisconception": "A long support chat may need an older section summarized.",
+    "analogy": "A desk only holds so many pages at once.",
+    "realWorldExample": "A long support chat may need an older section summarized.",
+    "commonMisconception": "Long context does not mean unlimited memory.",
     "keyIdeas": [
-      "Long context does not mean unlimited memory."
+      "limit",
+      "tokens",
+      "context"
     ],
     "relatedConcepts": []
   },
   "llm-04": {
-    "analogy": "llm-04",
-    "realWorldExample": "A creativity dial changes how surprising the next word can be.",
-    "commonMisconception": "A writing assistant varies headline suggestions with sampling settings.",
+    "analogy": "A creativity dial changes how surprising the next word can be.",
+    "realWorldExample": "A writing assistant varies headline suggestions with sampling settings.",
+    "commonMisconception": "Higher temperature does not make facts more correct.",
     "keyIdeas": [
-      "Higher temperature does not make facts more correct."
+      "random",
+      "sampling",
+      "temperature"
     ],
     "relatedConcepts": []
   },
   "llm-05": {
-    "analogy": "llm-05",
-    "realWorldExample": "A confident storyteller can still invent details.",
-    "commonMisconception": "A chatbot cites a nonexistent report; you verify the source.",
+    "analogy": "A confident storyteller can still invent details.",
+    "realWorldExample": "A chatbot cites a nonexistent report; you verify the source.",
+    "commonMisconception": "Fluent answers are not proof of factual accuracy.",
     "keyIdeas": [
-      "Fluent answers are not proof of factual accuracy."
+      "false",
+      "unsupported",
+      "verify"
     ],
     "relatedConcepts": []
   },
   "agent-01": {
-    "analogy": "agent-01",
-    "realWorldExample": "A digital assistant that can take steps, not just answer.",
-    "commonMisconception": "A workplace assistant checks a calendar, then drafts an agenda.",
+    "analogy": "A digital assistant that can take steps, not just answer.",
+    "realWorldExample": "A workplace assistant checks a calendar, then drafts an agenda.",
+    "commonMisconception": "An agent is not automatically allowed to act without limits.",
     "keyIdeas": [
-      "An agent is not automatically allowed to act without limits."
+      "goal",
+      "tools",
+      "steps"
     ],
     "relatedConcepts": [],
     "visualExplanation": {
@@ -72,38 +84,46 @@ export const learningMetadata:Record<string,LearningMetadata>={
     }
   },
   "agent-02": {
-    "analogy": "agent-02",
-    "realWorldExample": "The model requests a tool, like asking a colleague to check a file.",
-    "commonMisconception": "An assistant requests a weather API, then summarizes the result.",
+    "analogy": "The model requests a tool, like asking a colleague to check a file.",
+    "realWorldExample": "An assistant requests a weather API, then summarizes the result.",
+    "commonMisconception": "The model doesn't execute arbitrary code by wishing it.",
     "keyIdeas": [
-      "The model doesn't execute arbitrary code by wishing it."
+      "application",
+      "execute",
+      "result"
     ],
     "relatedConcepts": []
   },
   "agent-03": {
-    "analogy": "agent-03",
-    "realWorldExample": "Think, take an action, inspect the result, repeat.",
-    "commonMisconception": "A support agent searches orders before suggesting a refund.",
+    "analogy": "Think, take an action, inspect the result, repeat.",
+    "realWorldExample": "A support agent searches orders before suggesting a refund.",
+    "commonMisconception": "A plan is not fixed; observations can change the next step.",
     "keyIdeas": [
-      "A plan is not fixed; observations can change the next step."
+      "reason",
+      "act",
+      "observe"
     ],
     "relatedConcepts": []
   },
   "agent-04": {
-    "analogy": "agent-04",
-    "realWorldExample": "Safety rails keep an automated assistant within its lane.",
-    "commonMisconception": "An expense agent requests approval before submitting a payment.",
+    "analogy": "Safety rails keep an automated assistant within its lane.",
+    "realWorldExample": "An expense agent requests approval before submitting a payment.",
+    "commonMisconception": "A clever agent is not automatically a safe agent.",
     "keyIdeas": [
-      "A clever agent is not automatically a safe agent."
+      "permissions",
+      "approval",
+      "validation"
     ],
     "relatedConcepts": []
   },
   "rag-01": {
-    "analogy": "rag-01",
-    "realWorldExample": "An open-book exam: retrieve notes before answering.",
-    "commonMisconception": "A workplace chatbot searches company policies before responding.",
+    "analogy": "An open-book exam: retrieve notes before answering.",
+    "realWorldExample": "A workplace chatbot searches company policies before responding.",
+    "commonMisconception": "RAG does not retrain model weights with each query.",
     "keyIdeas": [
-      "RAG does not retrain model weights with each query."
+      "retrieve",
+      "context",
+      "answer"
     ],
     "relatedConcepts": [],
     "visualExplanation": {
@@ -116,11 +136,13 @@ export const learningMetadata:Record<string,LearningMetadata>={
     }
   },
   "rag-02": {
-    "analogy": "rag-02",
-    "realWorldExample": "A map that places similar ideas close to each other.",
-    "commonMisconception": "Spotify-like recommendation systems can compare item vectors.",
+    "analogy": "A map that places similar ideas close to each other.",
+    "realWorldExample": "Spotify-like recommendation systems can compare item vectors.",
+    "commonMisconception": "An embedding is not a human-readable summary.",
     "keyIdeas": [
-      "An embedding is not a human-readable summary."
+      "vector",
+      "similar",
+      "meaning"
     ],
     "relatedConcepts": [],
     "visualExplanation": {
@@ -133,11 +155,13 @@ export const learningMetadata:Record<string,LearningMetadata>={
     }
   },
   "rag-03": {
-    "analogy": "rag-03",
-    "realWorldExample": "Cut a big book into searchable pages.",
-    "commonMisconception": "A policy chatbot indexes handbook paragraphs separately.",
+    "analogy": "Cut a big book into searchable pages.",
+    "realWorldExample": "A policy chatbot indexes handbook paragraphs separately.",
+    "commonMisconception": "Tiny chunks can lose context; giant chunks add noise.",
     "keyIdeas": [
-      "Tiny chunks can lose context; giant chunks add noise."
+      "split",
+      "passages",
+      "retrieve"
     ],
     "relatedConcepts": [],
     "visualExplanation": {
@@ -150,20 +174,24 @@ export const learningMetadata:Record<string,LearningMetadata>={
     }
   },
   "rag-04": {
-    "analogy": "rag-04",
-    "realWorldExample": "Look up exact words and similar meanings together.",
-    "commonMisconception": "A search box finds both an error code and a related description.",
+    "analogy": "Look up exact words and similar meanings together.",
+    "realWorldExample": "A search box finds both an error code and a related description.",
+    "commonMisconception": "Vector search alone isn't always best for exact strings.",
     "keyIdeas": [
-      "Vector search alone isn't always best for exact strings."
+      "keyword",
+      "semantic",
+      "combine"
     ],
     "relatedConcepts": []
   },
   "mcp-01": {
-    "analogy": "mcp-01",
-    "realWorldExample": "A common plug shape for AI apps to reach tools and data.",
-    "commonMisconception": "A desktop assistant connects to a files tool through MCP.",
+    "analogy": "A common plug shape for AI apps to reach tools and data.",
+    "realWorldExample": "A desktop assistant connects to a files tool through MCP.",
+    "commonMisconception": "MCP is a communication protocol, not a model itself.",
     "keyIdeas": [
-      "MCP is a communication protocol, not a model itself."
+      "protocol",
+      "tools",
+      "data"
     ],
     "relatedConcepts": [],
     "visualExplanation": {
@@ -176,101 +204,123 @@ export const learningMetadata:Record<string,LearningMetadata>={
     }
   },
   "mcp-02": {
-    "analogy": "mcp-02",
-    "realWorldExample": "A service counter advertises what actions are available.",
-    "commonMisconception": "An MCP server exposes a read-only document search tool.",
+    "analogy": "A service counter advertises what actions are available.",
+    "realWorldExample": "An MCP server exposes a read-only document search tool.",
+    "commonMisconception": "An MCP server does not have to host an AI model.",
     "keyIdeas": [
-      "An MCP server does not have to host an AI model."
+      "expose",
+      "client",
+      "tools"
     ],
     "relatedConcepts": []
   },
   "mcp-03": {
-    "analogy": "mcp-03",
-    "realWorldExample": "A shared connector still needs locks and permissions.",
-    "commonMisconception": "A company tool checks access rights before exposing payroll files.",
+    "analogy": "A shared connector still needs locks and permissions.",
+    "realWorldExample": "A company tool checks access rights before exposing payroll files.",
+    "commonMisconception": "Using a standard protocol doesn't remove security risks.",
     "keyIdeas": [
-      "Using a standard protocol doesn't remove security risks."
+      "authentication",
+      "authorization",
+      "permissions"
     ],
     "relatedConcepts": []
   },
   "prompt-01": {
-    "analogy": "prompt-01",
-    "realWorldExample": "Give a helpful coworker clear instructions and constraints.",
-    "commonMisconception": "You ask ChatGPT for a summary in three bullet points.",
+    "analogy": "Give a helpful coworker clear instructions and constraints.",
+    "realWorldExample": "You ask ChatGPT for a summary in three bullet points.",
+    "commonMisconception": "A prompt cannot guarantee perfect model behavior.",
     "keyIdeas": [
-      "A prompt cannot guarantee perfect model behavior."
+      "instructions",
+      "context",
+      "format"
     ],
     "relatedConcepts": []
   },
   "prompt-02": {
-    "analogy": "prompt-02",
-    "realWorldExample": "Show a few worked examples before the new problem.",
-    "commonMisconception": "An email classifier sees three examples of labels.",
+    "analogy": "Show a few worked examples before the new problem.",
+    "realWorldExample": "An email classifier sees three examples of labels.",
+    "commonMisconception": "Providing examples is not the same as fine-tuning weights.",
     "keyIdeas": [
-      "Providing examples is not the same as fine-tuning weights."
+      "examples",
+      "prompt",
+      "weights"
     ],
     "relatedConcepts": []
   },
   "prompt-03": {
-    "analogy": "prompt-03",
-    "realWorldExample": "A malicious sticky note pretending to be the boss.",
-    "commonMisconception": "A retrieved webpage tells an assistant to leak a secret.",
+    "analogy": "A malicious sticky note pretending to be the boss.",
+    "realWorldExample": "A retrieved webpage tells an assistant to leak a secret.",
+    "commonMisconception": "Untrusted page content is not a higher-priority instruction.",
     "keyIdeas": [
-      "Untrusted page content is not a higher-priority instruction."
+      "untrusted",
+      "instructions",
+      "attack"
     ],
     "relatedConcepts": []
   },
   "prompt-04": {
-    "analogy": "prompt-04",
-    "realWorldExample": "Use a form with named fields rather than free-form prose.",
-    "commonMisconception": "An automation expects JSON with subject and priority.",
+    "analogy": "Use a form with named fields rather than free-form prose.",
+    "realWorldExample": "An automation expects JSON with subject and priority.",
+    "commonMisconception": "JSON-like text may still need schema validation.",
     "keyIdeas": [
-      "JSON-like text may still need schema validation."
+      "schema",
+      "json",
+      "validate"
     ],
     "relatedConcepts": []
   },
   "eval-01": {
-    "analogy": "eval-01",
-    "realWorldExample": "A driving test for AI behavior.",
-    "commonMisconception": "A team tests a chatbot on real customer support cases.",
+    "analogy": "A driving test for AI behavior.",
+    "realWorldExample": "A team tests a chatbot on real customer support cases.",
+    "commonMisconception": "One impressive demo is not a reliable evaluation.",
     "keyIdeas": [
-      "One impressive demo is not a reliable evaluation."
+      "tests",
+      "criteria",
+      "measure"
     ],
     "relatedConcepts": []
   },
   "eval-02": {
-    "analogy": "eval-02",
-    "realWorldExample": "Precision asks how many finds were good; recall asks how many good finds were found.",
-    "commonMisconception": "An inbox spam detector balances false alarms and missed spam.",
+    "analogy": "Precision asks how many finds were good; recall asks how many good finds were found.",
+    "realWorldExample": "An inbox spam detector balances false alarms and missed spam.",
+    "commonMisconception": "A high precision score alone does not imply high recall.",
     "keyIdeas": [
-      "A high precision score alone does not imply high recall."
+      "precision",
+      "recall",
+      "relevant"
     ],
     "relatedConcepts": []
   },
   "eval-03": {
-    "analogy": "eval-03",
-    "realWorldExample": "Keep a final exam separate from homework.",
-    "commonMisconception": "A team evaluates a classifier on examples never used for tuning.",
+    "analogy": "Keep a final exam separate from homework.",
+    "realWorldExample": "A team evaluates a classifier on examples never used for tuning.",
+    "commonMisconception": "Repeated peeking can turn a test set into training feedback.",
     "keyIdeas": [
-      "Repeated peeking can turn a test set into training feedback."
+      "unseen",
+      "test",
+      "tuning"
     ],
     "relatedConcepts": []
   },
   "eval-04": {
-    "analogy": "eval-04",
-    "realWorldExample": "Use a model as a grader, then check the grader.",
-    "commonMisconception": "A company compares summaries with a rubric and human spot checks.",
+    "analogy": "Use a model as a grader, then check the grader.",
+    "realWorldExample": "A company compares summaries with a rubric and human spot checks.",
+    "commonMisconception": "Model judges can be biased or inconsistent.",
     "keyIdeas": [
-      "Model judges can be biased or inconsistent."
+      "model",
+      "rubric",
+      "human"
     ],
     "relatedConcepts": []
   },
   "tr-01": {
-    "analogy": "tr-01",
-    "realWorldExample": "A team of words pays attention to other words in a sentence.",
-    "commonMisconception": "ChatGPT-like models use Transformer-based architectures.",
+    "analogy": "A team of words pays attention to other words in a sentence.",
+    "realWorldExample": "ChatGPT-like models use Transformer-based architectures.",
+    "commonMisconception": "A Transformer is more than a keyword lookup.",
     "keyIdeas": [
-      "A Transformer is more than a keyword lookup."
+      "attention",
+      "tokens",
+      "architecture"
     ],
     "relatedConcepts": [],
     "visualExplanation": {
@@ -283,11 +333,13 @@ export const learningMetadata:Record<string,LearningMetadata>={
     }
   },
   "tr-02": {
-    "analogy": "tr-02",
-    "realWorldExample": "Each word looks at other words for clues.",
-    "commonMisconception": "The word 'bank' uses 'river' or 'money' to determine meaning.",
+    "analogy": "Each word looks at other words for clues.",
+    "realWorldExample": "The word 'bank' uses 'river' or 'money' to determine meaning.",
+    "commonMisconception": "Not every attention head gives a human-readable reason.",
     "keyIdeas": [
-      "Not every attention head gives a human-readable reason."
+      "tokens",
+      "weights",
+      "context"
     ],
     "relatedConcepts": [],
     "visualExplanation": {
@@ -300,56 +352,68 @@ export const learningMetadata:Record<string,LearningMetadata>={
     }
   },
   "tr-03": {
-    "analogy": "tr-03",
-    "realWorldExample": "Seat numbers help track where everyone sits.",
-    "commonMisconception": "A translation model distinguishes word order with position signals.",
+    "analogy": "Seat numbers help track where everyone sits.",
+    "realWorldExample": "A translation model distinguishes word order with position signals.",
+    "commonMisconception": "Attention by itself does not encode sequence order.",
     "keyIdeas": [
-      "Attention by itself does not encode sequence order."
+      "position",
+      "order",
+      "tokens"
     ],
     "relatedConcepts": []
   },
   "tr-04": {
-    "analogy": "tr-04",
-    "realWorldExample": "Keep useful notes from earlier steps instead of recomputing.",
-    "commonMisconception": "A streaming chatbot reuses past attention states while typing.",
+    "analogy": "Keep useful notes from earlier steps instead of recomputing.",
+    "realWorldExample": "A streaming chatbot reuses past attention states while typing.",
+    "commonMisconception": "KV caching saves compute but uses memory.",
     "keyIdeas": [
-      "KV caching saves compute but uses memory."
+      "cache",
+      "keys",
+      "values"
     ],
     "relatedConcepts": []
   },
   "ft-01": {
-    "analogy": "ft-01",
-    "realWorldExample": "Coach an experienced employee on a specialized task.",
-    "commonMisconception": "A support model is adapted to match company response style.",
+    "analogy": "Coach an experienced employee on a specialized task.",
+    "realWorldExample": "A support model is adapted to match company response style.",
+    "commonMisconception": "Fine-tuning is not the best way to store changing news.",
     "keyIdeas": [
-      "Fine-tuning is not the best way to store changing news."
+      "weights",
+      "train",
+      "adapt"
     ],
     "relatedConcepts": []
   },
   "ft-02": {
-    "analogy": "ft-02",
-    "realWorldExample": "Add a small adapter instead of rebuilding the whole engine.",
-    "commonMisconception": "A team adapts a model with less GPU memory using LoRA.",
+    "analogy": "Add a small adapter instead of rebuilding the whole engine.",
+    "realWorldExample": "A team adapts a model with less GPU memory using LoRA.",
+    "commonMisconception": "LoRA still trains parameters; it isn't prompting alone.",
     "keyIdeas": [
-      "LoRA still trains parameters; it isn't prompting alone."
+      "low-rank",
+      "weights",
+      "efficient"
     ],
     "relatedConcepts": []
   },
   "ft-03": {
-    "analogy": "ft-03",
-    "realWorldExample": "Memorizing practice questions isn't the same as learning.",
-    "commonMisconception": "A fine-tuned classifier excels on examples but misses new ones.",
+    "analogy": "Memorizing practice questions isn't the same as learning.",
+    "realWorldExample": "A fine-tuned classifier excels on examples but misses new ones.",
+    "commonMisconception": "Great training accuracy doesn't prove generalization.",
     "keyIdeas": [
-      "Great training accuracy doesn't prove generalization."
+      "memorize",
+      "train",
+      "unseen"
     ],
     "relatedConcepts": []
   },
   "ft-04": {
-    "analogy": "ft-04",
-    "realWorldExample": "Choose open-book reference material for changing facts.",
-    "commonMisconception": "A policy assistant retrieves latest rules with RAG; style is tuned separately.",
+    "analogy": "Choose open-book reference material for changing facts.",
+    "realWorldExample": "A policy assistant retrieves latest rules with RAG; style is tuned separately.",
+    "commonMisconception": "RAG and fine-tuning are complementary, not always rivals.",
     "keyIdeas": [
-      "RAG and fine-tuning are complementary, not always rivals."
+      "rag",
+      "retrieval",
+      "fine-tuning"
     ],
     "relatedConcepts": []
   }

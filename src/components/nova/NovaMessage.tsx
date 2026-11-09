@@ -1,1 +1,0 @@
-export function NovaMessage({children,complete=false}:{children:React.ReactNode;complete?:boolean}){return <div aria-live={complete?"polite":"off"} className="rounded-xl bg-soft p-3 text-sm leading-relaxed text-ink">{children}</div>}

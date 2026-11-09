@@ -1,12 +1,12 @@
 import {useMemo,useState} from "react";
-import {Link,useNavigate} from "react-router-dom";
+import {Link,useNavigate,useSearchParams} from "react-router-dom";
 import {ArrowRight,Brain,Clock3} from "lucide-react";
 import {categories,type QuizSource} from "../types";
 import {questions} from "../data/questions";
 import {useApp} from "../context/AppContext";
 import {useQuiz} from "../context/QuizContext";
 import {isDue,selectQuestions} from "../lib/quiz";
-export function QuizSetup(){const navigate=useNavigate();const {progress}=useApp();const {stats,schedule,session,begin,abandon}=useQuiz();const [source,setSource]=useState<QuizSource>("all");const [category,setCategory]=useState("All");const [difficulty,setDifficulty]=useState("All");const [tags,setTags]=useState<string[]>([]);const [count,setCount]=useState<string>("10");const allTags=useMemo(()=>[...new Set(questions.flatMap(q=>q.tags))].sort(),[]);
+export function QuizSetup(){const navigate=useNavigate();const [query]=useSearchParams();const {progress}=useApp();const {stats,schedule,session,begin,abandon}=useQuiz();const [source,setSource]=useState<QuizSource>((query.get("source")==="scenario"?"scenario":"all"));const [category,setCategory]=useState(query.get("category")||"All");const [difficulty,setDifficulty]=useState("All");const [tags,setTags]=useState<string[]>([]);const [count,setCount]=useState<string>("10");const allTags=useMemo(()=>[...new Set(questions.flatMap(q=>q.tags))].sort(),[]);
 const candidates=selectQuestions(source,category,tags,difficulty,progress,stats,schedule,"all");const due=Object.values(schedule).filter(isDue).length;
 const start=()=>{if(!candidates.length)return;begin(selectQuestions(source,category,tags,difficulty,progress,stats,schedule,count==="all"?"all":Number(count)).map(q=>q.id),source==="scenario");navigate("/quiz/play")};
 const input="w-full rounded-xl border border-line bg-surface px-3 py-3 text-sm text-ink";

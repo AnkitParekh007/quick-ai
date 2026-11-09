@@ -1,4 +1,4 @@
-export const categories = ["LLMs","Agents","RAG","MCP","Prompting","Evaluation","Transformers","Fine-tuning"] as const;
+export const categories = ["LLMs","Agents","RAG","MCP","Prompting","Evaluation","Transformers","Fine-tuning","AI Foundations","Machine Learning","Neural Networks","LLM Engineering","Context Engineering","Retrieval Engineering","Agent Orchestration","State & Memory","Tool Integration","Safety & Security","Evaluation Design","Observability","Model Serving","Optimization","Multimodal AI","Data Engineering","System Architecture","Governance"] as const;
 export type Category=typeof categories[number];
 export type Difficulty="Beginner"|"Intermediate"|"Advanced";
 export type Tag=string;

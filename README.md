@@ -69,3 +69,24 @@ Use Pause/Resume, Skip, Replay, and Speed up for the word-by-word explanation. A
 Under **Settings**, disable Nova, disable animations, or opt into opening the panel automatically; preferences are saved in localStorage. With prefers-reduced-motion, Nova stays static and explanations appear immediately. The existing Teach it back experience provides keyword-based feedback.
 
 Implementation: `src/components/nova/` contains `NovaMascot`, `NovaBubble`, `NovaPanel`, `NovaMessage`, `NovaAnimationController`, `TypewriterText`, and `NovaControls`. `src/data/novaScripts.ts` generates explanations from existing question fields; optional remote generation is not enabled.
+
+## Expanded AI System Architect question bank
+
+The question bank now contains **252 original questions across 26 categories**, from AI and ML foundations through RAG, agents, MCP, orchestration, context management, security, evaluations, model serving, observability, cost, multimodal systems, and governance. New question modules live in `src/data/architectQuestionsA.ts` through `architectQuestionsE.ts`; the original 32 IDs are preserved for existing progress data.
+
+Use **Architect Path** in the sidebar for a five-stage roadmap and links to the source curricula. It is a self-guided learning path, **not a certification**. Many choices are contextual; practice hands-on system design and compare alternatives using requirements, evals, latency, and cost.
+
+### Sources used to inform the original curriculum
+
+These official learning resources informed topic coverage and organization; question wording and answers are original, and the app is not endorsed by the providers.
+
+- OpenAI Academy, [Builder Community](https://academy.openai.com/en/public/clubs/builders-etkn1/resources/welcome-to-the-openai-builder-community) and [Building Agents](https://academy.openai.com/en/public/clubs/builders-etkn1/externals/building-agents-2025-08-18)
+- OpenAI Developers, [Evaluation Best Practices](https://developers.openai.com/api/docs/guides/evaluation-best-practices) and [Scaling](https://developers.openai.com/learn/scaling)
+- Anthropic, [AI Fluency Framework](https://www.anthropic.com/ai-fluency/overview) and [Claude Prompt Engineering](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview)
+- LangChain Academy, [LangGraph](https://academy.langchain.com/courses/intro-to-langgraph), [Deep Agents](https://academy.langchain.com/courses/foundation-introduction-to-deepagents), and [LangSmith Essentials](https://academy.langchain.com/courses/quickstart-langsmith-essentials/)
+
+### Editing and validation
+
+New entries include a stable ID, short answer, category, difficulty, tags, and a specific practical example. The enrichment layer supplies a short analogy, common misconception, teach-back key phrases, and a reusable workflow diagram. Quiz question types are generated deterministically when manually curated quiz metadata is not present; 20 additional architecture scenarios have hand-written options and feedback.
+
+Run `npm run validate:bank` before committing questions; `npm run build` also runs this check. Existing localStorage progress remains keyed by the original question IDs. Review material critically before using it for production architecture decisions.
