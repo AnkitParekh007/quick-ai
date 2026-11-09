@@ -34,3 +34,10 @@ svg [role="button"]:focus-visible .viz-focus-outline{stroke-width:4}
 .nova-cursor{animation:nova-cursor .6s steps(1,end) infinite;color:var(--viz-purple-stroke)}
 @media(max-width:1023px){.nova-dock .nova-panel{border-bottom-left-radius:0;border-bottom-right-radius:0;max-height:85vh}}
 @media(prefers-reduced-motion:reduce){.nova-robot *,.nova-cursor{animation:none!important;transition:none!important}.nova-bubble{transition:none!important}}
+
+/* A docked side panel on wide desktops reserves room beside the answer. */
+@media (min-width:1200px){
+ .nova-detail:has(> .nova-dock){max-width:1160px;display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:24px;align-items:start}
+ .nova-detail > .nova-dock{position:sticky;top:92px;right:auto;bottom:auto;left:auto;width:100%;max-width:none;z-index:10}
+ .nova-detail .nova-panel-wide{width:100%}
+}
