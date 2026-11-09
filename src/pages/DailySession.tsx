@@ -7,7 +7,17 @@ import {useQuiz} from "../context/QuizContext";
 import {useLearning,localDay} from "../context/LearningContext";
 import {isDue} from "../lib/quiz";
 import {ClarityMeter,ConceptDiagram} from "../components/LearningSections";
-function dailyQuestions(day:string,clarity:Record<string,string>,progress:Record<string,string>,stats:Record<string,{incorrectAnswers:number;timesSeen:number}>,schedule:Record<string,{dueAt:string;rating:string}>,completed:Set<string>){const score=(id:string)=>{const stat=stats[id];return (isDue(schedule[id] as never)?100:0)+(clarity[id]==="confusing"?70:0)+(stat?.incorrectAnswers||0)*12+(progress[id]==="review"?20:0)+(stat?0:10)};const stable=(id:string)=>{let h=0;for(const c of day+id)h=(h*31+c.charCodeAt(0))|0;return (h>>>0)/4294967296};return [...questions].filter(q=>!completed.has(q.id)).sort((a,b)=>score(b.id)-score(a.id)||stable(a.id)-stable(b.id)).slice(0,7)}
+function dailyQuestions(day:string,clarity:Record<string,string>,progress:Record<string,string>,stats:Record<string,{incorrectAnswers:number;timesSeen:number}>,schedule:Record<string,{dueAt:string;rating:string}>,completed:Set<string>){
+ const pool=questions.filter(q=>!completed.has(q.id));
+ const stable=(id:string)=>{let h=0;for(const c of day+id)h=(h*31+c.charCodeAt(0))|0;return (h>>>0)/4294967296};
+ const ranked=(list:typeof questions)=>[...list].sort((a,b)=>stable(a.id)-stable(b.id));
+ const due=ranked(pool.filter(q=>isDue(schedule[q.id] as never)));
+ const weak=ranked(pool.filter(q=>clarity[q.id]==="confusing"||(stats[q.id]?.incorrectAnswers||0)>0||progress[q.id]==="review"));
+ const fresh=ranked(pool.filter(q=>!stats[q.id]?.timesSeen&&!clarity[q.id]));
+ const selected:typeof questions=[];const seen=new Set<string>();
+ const take=(list:typeof questions,n:number)=>{for(const q of list){if(selected.length>=7||n===0)break;if(seen.has(q.id))continue;selected.push(q);seen.add(q.id);n--}};
+ take(due,2);take(weak,2);take(fresh,3);take([...due,...weak,...fresh,...ranked(pool)],7-selected.length);return selected
+}
 export function DailySession(){const {progress}=useApp();const {stats,schedule}=useQuiz();const {clarity,dailyCompleted,completeDaily,streak,xp}=useLearning();const day=localDay();const [index,setIndex]=useState(0);const [revealed,setRevealed]=useState(false);const [done,setDone]=useState(false);const already=dailyCompleted[day]||[];const deck=useMemo(()=>dailyQuestions(day,clarity,progress,stats,schedule,new Set(already)),[day]);const finished=already.length>0||done;
 if(finished)return <div className="mx-auto max-w-xl py-12 text-center"><CheckCircle2 size={44} className="mx-auto text-green-600"/><h1 className="mt-5 text-3xl font-bold">Today's learning win!</h1><p className="mt-3 text-muted">You reviewed {already.length||deck.length} concepts today. Small steps build lasting understanding.</p><p className="mt-4 text-sm font-semibold text-accent">{streak} day streak · {xp} XP</p><Link className="mt-6 inline-block rounded-xl bg-accent px-5 py-3 text-sm font-semibold text-white" to="/quiz">Practice with a quiz</Link></div>;
 const q=deck[index];if(!q)return <div className="py-12 text-center"><h1 className="text-xl font-bold">You're all caught up!</h1><p className="mt-2 text-muted">All questions have been reviewed in today's session.</p></div>;
