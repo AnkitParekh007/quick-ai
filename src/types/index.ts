@@ -2,7 +2,7 @@ export const categories = ["LLMs","Agents","RAG","MCP","Prompting","Evaluation",
 export type Category=typeof categories[number];
 export type Difficulty="Beginner"|"Intermediate"|"Advanced";
 export type Tag=string;
-export interface Question{id:string;question:string;answer:string;category:Category;tags:Tag[];difficulty:Difficulty;relatedIds?:string[];quizOptions?:string[];correctOptionIndex?:number;explanation?:string;isTrueFalse?:boolean;correctBoolean?:boolean;fillInTheBlankAnswer?:string;acceptableAnswers?:string[];quizPrompt?:string}
+export interface Question{id:string;question:string;answer:string;category:Category;tags:Tag[];difficulty:Difficulty;relatedIds?:string[];shortAnswer?:string;analogy?:string;realWorldExample?:string;commonMisconception?:string;relatedConcepts?:string[];visualExplanation?:VisualExplanation;keyIdeas?:string[];scenario?:Scenario;quizOptions?:string[];correctOptionIndex?:number;explanation?:string;isTrueFalse?:boolean;correctBoolean?:boolean;fillInTheBlankAnswer?:string;acceptableAnswers?:string[];quizPrompt?:string}
 export type ProgressStatus="learned"|"review";
 export type Progress=Record<string,ProgressStatus>;
 export type Theme="light"|"dark"|"system";
@@ -16,3 +16,10 @@ export interface QuizAttempt {id:string;startedAt:string;completedAt:string;ques
 export interface QuestionStats {timesSeen:number;correctAnswers:number;incorrectAnswers:number;lastAttemptedAt:string}
 export interface ReviewSchedule {dueAt:string;rating:SpacedRating}
 export interface QuizSession {id:string;startedAt:string;questionIds:string[];currentIndex:number;answers:QuizAnswer[];scenarioMode?:boolean}
+
+export interface VisualExplanation {nodes:string[];caption:string}
+export interface Scenario {situation:string;options:string[];correctOptionIndex:number;feedback:string[]}
+export interface LearningMetadata {analogy:string;realWorldExample:string;commonMisconception:string;relatedConcepts:string[];keyIdeas:string[];visualExplanation?:VisualExplanation}
+export type Clarity="clear"|"somewhat"|"confusing";
+export interface TeachBackResult {questionId:string;text:string;matched:string[];missing:string[];at:string}
+export interface LearningEvent {questionId:string;date:string;kind:"teach"|"view"|"quiz"|"daily"}
