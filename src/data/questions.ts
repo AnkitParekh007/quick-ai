@@ -1,5 +1,6 @@
 import type {Question} from "../types";
-export const questions:Question[]=[
+import {quizMetadata} from "./quizMetadata";
+const baseQuestions:Question[]=[
 {id:"llm-01",question:"What is a large language model (LLM)?",answer:"An LLM is a neural network trained on large text datasets to predict tokens. It can generate, summarize, and transform language from patterns learned during training.",category:"LLMs",tags:["Fundamentals","Language"],difficulty:"Beginner",relatedIds:["llm-02","tr-01"]},
 {id:"llm-02",question:"What is a token in an LLM?",answer:"A token is a unit of text processed by a model, such as a word, word fragment, or punctuation mark. Tokenization affects context length and usage cost.",category:"LLMs",tags:["Fundamentals","Tokens"],difficulty:"Beginner",relatedIds:["llm-03"]},
 {id:"llm-03",question:"What is a context window?",answer:"The context window is the maximum number of tokens a model can consider in one request, including input and generated output. Content beyond the limit must be omitted or condensed.",category:"LLMs",tags:["Tokens","Inference"],difficulty:"Beginner"},
@@ -33,3 +34,4 @@ export const questions:Question[]=[
 {id:"ft-03",question:"What is overfitting in fine-tuning?",answer:"Overfitting happens when a model memorizes training patterns and performs poorly on new examples. Validation data, regularization, and diverse samples help detect it.",category:"Fine-tuning",tags:["Training","Quality"],difficulty:"Intermediate"},
 {id:"ft-04",question:"When should you choose RAG over fine-tuning?",answer:"Choose RAG when answers depend on changing or source-specific facts that need citations. Fine-tuning is better suited to teaching consistent behavior, format, or domain patterns.",category:"Fine-tuning",tags:["Retrieval","Adaptation"],difficulty:"Intermediate",relatedIds:["rag-01","ft-01"]}
 ];
+export const questions:Question[]=baseQuestions.map(q=>({...q,...quizMetadata[q.id]}));
