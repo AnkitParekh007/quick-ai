@@ -37,3 +37,13 @@ To extend quiz content, edit `src/data/quizMetadata.ts` keyed by question ID. Th
 ## Build verification
 
 Run `npm run build` to typecheck and produce a production build. The CI workflow runs this command on pushes and pull requests.
+
+## Learning support
+
+Each question now combines a 2–3-line `shortAnswer`, analogy, practical example, misconception, connected concepts, and optional visual sequence. Edit `src/data/learningMetadata.ts` or `src/data/scenarios.ts` to extend them.
+
+Question detail pages include **Explain simply**, a clear analogy caveat, a real-world example, a misconception, visual diagrams, and a **Teach it back** text exercise. Teach-back feedback is an explicitly **keyword-based heuristic**, not an AI grader; paraphrases may be missed.
+
+Mark concepts Clear, Somewhat clear, or Confusing to influence daily practice. **Daily 5-minute** offers seven prioritized concepts using due-review, confusion and quiz mistakes, followed by new concepts. The session ends with a small progress recap. Daily completions, XP, badges, and category confidence are persisted locally. Streak recovery is a one-time non-punitive recovery for the previous day. **Learning progress** tracks these signals.
+
+Quiz setup includes a **Real-world scenarios** source with practical dilemmas, four options, and explanation-specific feedback for each choice.
