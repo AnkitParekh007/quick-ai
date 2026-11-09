@@ -90,3 +90,22 @@ These official learning resources informed topic coverage and organization; ques
 New entries include a stable ID, short answer, category, difficulty, tags, and a specific practical example. The enrichment layer supplies a short analogy, common misconception, teach-back key phrases, and a reusable workflow diagram. Quiz question types are generated deterministically when manually curated quiz metadata is not present; 20 additional architecture scenarios have hand-written options and feedback.
 
 Run `npm run validate:bank` before committing questions; `npm run build` also runs this check. Existing localStorage progress remains keyed by the original question IDs. Review material critically before using it for production architecture decisions.
+
+## Career-oriented AI Architect learning platform
+
+Start at **Guided Learning** (`/learn`): eight paths and 32 scaffolded lessons with prerequisites, durations, familiar analogies, simple checkpoints, no-code activities, glossary, and a free-exploration toggle. Existing 252 questions, quizzes, daily learning, diagrams, and Nova remain available.
+
+- **Decision Drills** (`/decisions`): six business choices with recommended approaches, trade-offs, risk, cost/latency implications, and improved design.
+- **Failure Lab** (`/failures`): seven incidents with root cause and remediation.
+- **Trade-off Simulator** (`/tradeoffs`): six adjustable architecture decisions and *illustrative* 0–100 impact indicators. They are not real cost or latency estimates.
+- **Architecture Canvas** (`/canvas`): drag/drop and keyboard-add blocks, click-to-connect, structural warnings, saved diagrams, SVG image export and Markdown design document export. Designs remain local; no hosted share link is created.
+- **System Design** (`/challenges`): seven challenge briefs with component hints, four written design sections, linked diagrams and 10-dimension rubric.
+- **Build Projects** (`/projects`): six guided starter projects, checkpoints, hints, template code/pseudocode, completion evidence saved to portfolio.
+- **Mentor Feedback** (`/mentor`): deterministic *keyword- and diagram-based* review with strengths, missing topics, next questions and suggestions. It is **not an LLM** and cannot certify design correctness. Submissions stay local.
+- **My Portfolio** (`/portfolio`): completed paths, quiz results, projects, diagrams, decisions, reflections and an exportable Markdown learning profile. Completion is self-reported, not professional accreditation.
+
+All new progress is persisted under `aiqb-career-v1` in browser localStorage. The existing progress keys are preserved. No back end, live inference service, credentials or cloud deployment is required. The exercises provide a guided, educational platform; real production implementations need engineering review, deployment and testing.
+
+### Extend the platform
+
+Data: `src/data/careerPaths.ts`, `architectExercises.ts`, `careerProjects.ts`. Progress: `src/context/CareerContext.tsx`. Feedback rubric: `src/lib/mentor.ts`. Canvas and exports: `src/pages/ArchitectCanvas.tsx`. Check UI usability and accessibility in a real browser after changes; CI runs content validation and the TypeScript/Vite production build.
