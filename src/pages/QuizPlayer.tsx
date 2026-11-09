@@ -1,9 +1,9 @@
 import {useState} from "react";
 import {useNavigate,Link} from "react-router-dom";
-import {NovaMascot} from "../components/nova/NovaMascot";import {ArrowRight,CheckCircle2,XCircle,Eye} from "lucide-react";
+import {NovaMascot} from "../components/nova/NovaMascot";import {useNovaSettings} from "../context/NovaContext";import {ArrowRight,CheckCircle2,XCircle,Eye} from "lucide-react";
 import {questions} from "../data/questions";import type {SpacedRating} from "../types";
 import {useQuiz} from "../context/QuizContext";import {correctAnswer,grade,kind} from "../lib/quiz";
-export function QuizPlayer(){const navigate=useNavigate();const {session,record,advance,finish,rate}=useQuiz();const [choice,setChoice]=useState<string>("");const [revealed,setRevealed]=useState(false);const [rated,setRated]=useState(false);
+export function QuizPlayer(){const {prefs:novaPrefs}=useNovaSettings();const navigate=useNavigate();const {session,record,advance,finish,rate}=useQuiz();const [choice,setChoice]=useState<string>("");const [revealed,setRevealed]=useState(false);const [rated,setRated]=useState(false);
 if(!session)return <div className="mx-auto max-w-xl py-16 text-center"><h1 className="text-2xl font-bold">No active quiz</h1><p className="mt-2 text-muted">Start a new quiz to test your knowledge.</p><Link to="/quiz" className="mt-6 inline-block rounded-xl bg-accent px-5 py-3 text-white">Set up quiz</Link></div>;
 const index=session.currentIndex;const q=questions.find(q=>q.id===session.questionIds[index]);if(!q)return <div>Question not found. <Link to="/quiz">Return to setup</Link></div>;
 const type=session.scenarioMode&&q.scenario?"scenario":kind(q);const answer=session.answers.find(a=>a.questionId===q.id);const submitted=!!answer;

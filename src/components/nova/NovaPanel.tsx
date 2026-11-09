@@ -20,7 +20,7 @@ export function NovaPanel({question:q,onClose,onMinimize,onHide}:{question:Quest
  const script=useMemo(()=>novaScript(q,mode),[q,mode]);const due=Object.values(schedule).filter(s=>new Date(s.dueAt).getTime()<=Date.now()).length;
  const onComplete=useCallback(()=>{setFinished(true);send("DONE")},[]);
  const play=(newMode?:NovaMode)=>{if(newMode)setMode(newMode);setFinished(false);setPaused(false);setEpoch(n=>n+1);send("THINK")};
- useEffect(()=>{const timer=window.setTimeout(()=>send("SPEAK"),reduced?0:240);return()=>window.clearTimeout(timer)},[epoch,reduced]);
+ useEffect(()=>{const timer=window.setTimeout(()=>send("SPEAK"),reduced?0:firstVisit?850:240);return()=>window.clearTimeout(timer)},[epoch,reduced,firstVisit]);
  const firstVisit=useMemo(()=>{try{const k="nova-greeted-"+q.id;if(sessionStorage.getItem(k))return false;sessionStorage.setItem(k,"1");return true}catch{return false}},[q.id]);
  useEffect(()=>{if(firstVisit)send("OPEN");else send("THINK")},[firstVisit,q.id]);
  useEffect(()=>{setMode("simple");setEpoch(0);setFinished(false);setPaused(false);setText("");setFeedback(null)},[q.id]);
