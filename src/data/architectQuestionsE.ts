@@ -242,7 +242,7 @@ export const architectQuestionsE:Question[]=[
   },
   {
     "id": "prompt-05",
-    "question": "What is instruction hierarchy?",
+    "question": "How does instruction hierarchy protect AI applications?",
     "answer": "Higher-priority application rules constrain user requests, while retrieved content remains untrusted evidence. Recency does not grant authority.",
     "category": "Prompting",
     "difficulty": "Intermediate",
